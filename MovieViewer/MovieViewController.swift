@@ -110,8 +110,6 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        //let request = createURL()
-        //dataCall(request)
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         tableView.reloadData()
         MBProgressHUD.hideHUDForView(self.view, animated: true)
