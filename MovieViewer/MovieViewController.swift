@@ -25,12 +25,19 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         tableView.delegate = self
         tableView.dataSource = self
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+
         /* Condensed to MARK 1 and 2 */
         let request = createURL()
         dataCall(request)
         
-        //  TODO: Pulldown refresh
+        //  Pulldown refresh
+        //  Initializing a UIRefreshControl
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,15 +68,36 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
         cell.posterView.setImageWithURL(imageURL!)
-        
-        print("row \(indexPath.row)") //TODO DELETE
-        return cell
+                return cell
     }
 
     // MARK: WIP pull down request refresh
-    func pullDownRefresh( pullDown: UIRefreshControl){
-        self.tableView.reloadData()
-        pullDown.endRefreshing()
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        print("MARK TEST")
+        // ... Create the NSURLRequest (myRequest) ...
+        let request = NSURLRequest(URL: createURL() )
+        // Configure session so that completion handler is executed on main UI thread
+        let session = NSURLSession(
+            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+            delegate:nil,
+            delegateQueue:NSOperationQueue.mainQueue()
+        )
+        
+        let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
+            completionHandler: { (data, response, error) in
+                
+                // ... Use the new data to update the data source ...
+                
+                // Reload the tableView now that there is new data
+                // + Show & Hide HUD and junk
+                MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                self.tableView.reloadData()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                print("TEST")
+                // Tell the refreshControl to stop spinning
+                refreshControl.endRefreshing()	
+        });
+        task.resume()
     }
     
     
@@ -81,7 +109,6 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
             delegate:nil,
             delegateQueue:NSOperationQueue.mainQueue()
         )
-        //MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         
         let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
             completionHandler: { (dataOrNil, response, error) in
@@ -108,12 +135,12 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         return urlPath!
     }
-    
+    /*
     func scrollViewDidScroll(scrollView: UIScrollView) {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         tableView.reloadData()
         MBProgressHUD.hideHUDForView(self.view, animated: true)
-    }
+    }*/
     
     
 }

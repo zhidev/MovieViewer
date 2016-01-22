@@ -56,13 +56,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="gJ7-6z-hKG"/>
                     <connections>
                         <outlet property="tableView" destination="w4q-yU-MgZ" id="TcW-qU-fyv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="162" y="331"/>
+            <point key="canvasLocation" x="694" y="331"/>
         </scene>
     </scenes>
 </document>
