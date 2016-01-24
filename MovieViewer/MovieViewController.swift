@@ -153,7 +153,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         return urlPath!
     }
     
-    //  Search Bar stuff
+    //  Search Bar stuff (Need to pull up keyboard maybe)
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         filteredMovies = searchText.isEmpty ? movies : movies?.filter({ (movies: NSDictionary) -> Bool in
             if let title = movies["title"] as? String {
