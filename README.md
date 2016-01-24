@@ -1,6 +1,6 @@
 Movie Viewer is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: 2 hours 00 minutes spent in total
+Time spent: 2 hours 25 minutes spent in total
 
 ## User Stories
 
@@ -16,7 +16,7 @@ The following **optional** features are implemented:
 - [ ] User sees an error message when there's a networking error.
 - [x] Movies are displayed using a CollectionView instead of a TableView.
 - [X] User can search for a movie.
-- [ ] All images fade in as they are loading.
+- [x] All images fade in as they are loading.
 - [ ] Customize the UI.
 
 The following **additional** features are implemented:
