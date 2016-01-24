@@ -10,9 +10,13 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
+
 class MovieViewController: UIViewController, UICollectionViewDataSource, UISearchBarDelegate {
 
     @IBOutlet var collectionView: UICollectionView!
+    
+    @IBOutlet var gradientView: UIView!
+    let gradientLayer = CAGradientLayer()
     
     @IBOutlet var networkBar: UITextView!
     @IBOutlet var searchBar: UISearchBar!
@@ -29,6 +33,10 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+
+        setBackgroundGradient()
         
         networkBar.hidden = true
         
@@ -55,8 +63,6 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let filteredMovies = filteredMovies {
@@ -205,6 +211,18 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         } else {
             networkBar.hidden = false
         }
+    }
+    //Make collection view background pretty
+    func setBackgroundGradient(){
+        gradientView.backgroundColor = UIColor.blueColor()
+        gradientLayer.frame = self.collectionView.bounds
+        let color1 = UIColor.purpleColor().CGColor as CGColorRef
+        let color2 = UIColor(red: 1.0, green: 0, blue: 0, alpha: 1.0).CGColor as CGColorRef
+        let color3 = UIColor.blackColor().CGColor as CGColorRef
+        let color4 = UIColor(white: 0.7, alpha: 0.3).CGColor as CGColorRef
+        gradientLayer.colors = [color1, color2, color3, color4]
+        gradientLayer.locations = [0.0, 0.4, 0.7, 1.0]
+        self.gradientView.layer.addSublayer(gradientLayer)
     }
     
 }

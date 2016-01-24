@@ -16,12 +16,18 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="OkH-SY-gRl">
                                 <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RYd-A4-knX">
                                     <size key="itemSize" width="198" height="214"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <view key="backgroundView" contentMode="scaleToFill" id="3UB-x4-Sm8">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="1" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="7Nw-Zk-TCI" customClass="MovieCCell" customModule="MovieViewer" customModuleProvider="target">
                                         <rect key="frame" x="61" y="0.0" width="198" height="214"/>
@@ -46,6 +52,7 @@
                             <searchBar contentMode="redraw" id="hp8-p7-Pmz">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.21176472306251526" green="0.0" blue="0.95294123888015747" alpha="1" colorSpace="deviceRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="⚠️ Network Error" textAlignment="center" id="Y0N-fl-LD5">
@@ -62,6 +69,7 @@
                     <navigationItem key="navigationItem" id="gJ7-6z-hKG"/>
                     <connections>
                         <outlet property="collectionView" destination="OkH-SY-gRl" id="Gu3-Ld-cJL"/>
+                        <outlet property="gradientView" destination="3UB-x4-Sm8" id="c6I-Wa-bOR"/>
                         <outlet property="networkBar" destination="Y0N-fl-LD5" id="9Hg-uf-Qf9"/>
                         <outlet property="searchBar" destination="hp8-p7-Pmz" id="b3B-aw-09u"/>
                     </connections>
