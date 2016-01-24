@@ -15,7 +15,7 @@ class selectedViewController: UIViewController {
     @IBOutlet var overviewLabel: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("test 2")
+        print("test in 2nd segue")
     }
 
     override func didReceiveMemoryWarning() {
