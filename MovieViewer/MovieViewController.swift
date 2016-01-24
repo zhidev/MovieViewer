@@ -14,6 +14,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
 
     @IBOutlet var collectionView: UICollectionView!
     
+    @IBOutlet var networkBar: UITextView!
     @IBOutlet var searchBar: UISearchBar!
     
     var movies: [NSDictionary]?
@@ -29,17 +30,16 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        networkBar.hidden = true
+        
 
         collectionView.dataSource = self
         //  For search bar later
         
         searchBar.delegate = self
         
-        
-        
         /* Condensed to MARK 1 and 2 */
-        let request = createURL()
-        dataCall(request)
+        createCollection()
         
         //  Pulldown refresh
         //  Initializing a UIRefreshControl
@@ -48,6 +48,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.insertSubview(refreshControl, atIndex: 0)
 
+    
         
     }
 
@@ -69,10 +70,10 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCCell
-        let movie = filteredMovies![indexPath.row]
-        /*let title = movie["title"] as! String
-        let overview = movie["overview"] as! String*/
         
+        checkNet()
+        
+        let movie = filteredMovies![indexPath.row]
         if let posterPath = movie["poster_path"] as? String {
             let imageURL = NSURL(string: baseUrl + posterPath)
             let imageRequest = NSURLRequest(URL: imageURL!)
@@ -80,7 +81,6 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
                 imageRequest,
                 placeholderImage: nil,
                 success: { (imageRequest, imageResponse, image) -> Void in
-                    
                     // imageResponse will be nil if the image is cached
                     if imageResponse != nil {
                         cell.posterView.alpha = 0.0
@@ -133,6 +133,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
                 refreshControl.endRefreshing()	
         });
         task.resume()
+        checkNet()
     }
     
     
@@ -161,7 +162,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         });
         task.resume()
     
-        
+        checkNet()
         
     }
     
@@ -170,6 +171,12 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         let urlPath = NSURL( string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
         
         return urlPath!
+    }
+    
+    // Make the network connection to update our collection view. Flag if neccesary
+    func createCollection(){
+        let request = createURL()
+        dataCall(request)
     }
     
     //  Search Bar stuff (Need to pull up keyboard maybe)
@@ -191,4 +198,13 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchBar.becomeFirstResponder()
     }
+    // Check network conenction. Call this everytime we reload data or make a network conenction
+    func checkNet(){
+        if Reachability.isConnectedToNetwork() == true {
+            networkBar.hidden = true
+        } else {
+            networkBar.hidden = false
+        }
+    }
+    
 }

@@ -31,7 +31,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Wf6-NO-Gr6">
-                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="220"/>
+                                                    <rect key="frame" x="0.0" y="-3" width="198" height="220"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -48,18 +48,27 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="⚠️ Network Error" textAlignment="center" id="Y0N-fl-LD5">
+                                <rect key="frame" x="0.0" y="44" width="320" height="33"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="gJ7-6z-hKG"/>
                     <connections>
                         <outlet property="collectionView" destination="OkH-SY-gRl" id="Gu3-Ld-cJL"/>
+                        <outlet property="networkBar" destination="Y0N-fl-LD5" id="9Hg-uf-Qf9"/>
                         <outlet property="searchBar" destination="hp8-p7-Pmz" id="b3B-aw-09u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="342" y="408"/>
+            <point key="canvasLocation" x="335" y="388"/>
         </scene>
     </scenes>
 </document>
