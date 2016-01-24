@@ -10,11 +10,14 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MovieViewController: UIViewController, UICollectionViewDataSource { //, UISearchBarDelegate {
+class MovieViewController: UIViewController, UICollectionViewDataSource, UISearchBarDelegate {
 
     @IBOutlet var collectionView: UICollectionView!
     
+    @IBOutlet var searchBar: UISearchBar!
+    
     var movies: [NSDictionary]?
+    var filteredMovies: [NSDictionary]?
     
     //  For Search Filter
     //  Actually I dont think we even need this. TBD
@@ -33,7 +36,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource { //, UI
         collectionView.dataSource = self
         //  For search bar later
         
-        //searchBar.delegate = self
+        searchBar.delegate = self
         
         
         
@@ -58,8 +61,8 @@ class MovieViewController: UIViewController, UICollectionViewDataSource { //, UI
 
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let movies = movies {
-            return movies.count
+        if let filteredMovies = filteredMovies {
+            return filteredMovies.count
         }
         else{
             return 0
@@ -69,7 +72,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource { //, UI
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCCell
-        let movie = movies![indexPath.row]
+        let movie = filteredMovies![indexPath.row]
         /*let title = movie["title"] as! String
         let overview = movie["overview"] as! String*/
         let posterPath = movie["poster_path"] as! String
@@ -131,6 +134,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource { //, UI
                             
                             
                             self.movies = responseDictionary["results"] as? [NSDictionary]
+                            self.filteredMovies = responseDictionary["results"] as? [NSDictionary]
                             self.collectionView.reloadData()
                             MBProgressHUD.hideHUDForView(self.view, animated: true)
                     }
@@ -148,12 +152,20 @@ class MovieViewController: UIViewController, UICollectionViewDataSource { //, UI
         
         return urlPath!
     }
-    /*
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        tableView.reloadData()
-        MBProgressHUD.hideHUDForView(self.view, animated: true)
-    }*/
     
-    
+    //  Search Bar stuff
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredMovies = searchText.isEmpty ? movies : movies?.filter({ (movies: NSDictionary) -> Bool in
+            if let title = movies["title"] as? String {
+                if title.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil {
+                    return true
+                }
+                else{
+                    return false
+                }
+            }
+            return false
+        })
+        collectionView.reloadData()
+    }
 }
