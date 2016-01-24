@@ -11,12 +11,12 @@ import AFNetworking
 import MBProgressHUD
 
 
-class MovieViewController: UIViewController, UICollectionViewDataSource, UISearchBarDelegate {
+class MovieViewController: UIViewController, UICollectionViewDataSource, UISearchBarDelegate, UICollectionViewDelegate {
 
     @IBOutlet var collectionView: UICollectionView!
     
     @IBOutlet var gradientView: UIView!
-    let gradientLayer = CAGradientLayer()
+    //let gradientLayer = CAGradientLayer()
     
     @IBOutlet var networkBar: UITextView!
     @IBOutlet var searchBar: UISearchBar!
@@ -33,15 +33,15 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("test")
 
-
-        setBackgroundGradient()
+        //setBackgroundGradient()
         
         networkBar.hidden = true
         
 
         collectionView.dataSource = self
+        collectionView.delegate = self
         //  For search bar later
         
         searchBar.delegate = self
@@ -55,8 +55,10 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.insertSubview(refreshControl, atIndex: 0)
-
-    
+	
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "closeSearchbar")
+        view.addGestureRecognizer(tap)
         
     }
 
@@ -139,6 +141,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
                 refreshControl.endRefreshing()	
         });
         task.resume()
+        showSearchbar()
         checkNet()
     }
     
@@ -200,10 +203,10 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         })
         collectionView.reloadData()
     }
-    /* // TODO create first responder to make keyboard come otu when begin editting in searcdhbar. additional optional
+     // TODO create first responder to make keyboard come otu when begin editting in searcdhbar. additional optional
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchBar.becomeFirstResponder()
-    }*/
+
+    }
     // Check network conenction. Call this everytime we reload data or make a network conenction
     func checkNet(){
         if Reachability.isConnectedToNetwork() == true {
@@ -214,15 +217,68 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     }
     //Make collectionview background pretty with gradient
     func setBackgroundGradient(){
-        gradientView.backgroundColor = UIColor.blueColor()
-        gradientLayer.frame = self.collectionView.bounds
-        let color1 = UIColor.purpleColor().CGColor as CGColorRef
-        let color2 = UIColor(red: 1.0, green: 0, blue: 0, alpha: 1.0).CGColor as CGColorRef
-        let color3 = UIColor.blackColor().CGColor as CGColorRef
-        let color4 = UIColor(white: 0.7, alpha: 0.3).CGColor as CGColorRef
-        gradientLayer.colors = [color1, color2, color3, color4]
-        gradientLayer.locations = [0.0, 0.4, 0.7, 1.0]
-        self.gradientView.layer.addSublayer(gradientLayer)
+        let rect = self.collectionView.bounds
+        let layer = Color.makeLayer(rect)
+        self.gradientView.layer.addSublayer(layer)
     }
     
+    
+    //Calls this function when the tap is recognized.
+    func closeSearchbar() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        searchBar.endEditing(true)
+        //searchBar.hidden = true
+        UIView.animateWithDuration(0.4, animations: {
+            self.searchBar.alpha = 0
+        })
+        print("search hide")
+        
+    }
+    func showSearchbar(){
+        //searchBar.hidden = false
+        print("search show")
+        UIView.animateWithDuration(0.4, animations: {
+            self.searchBar.alpha = 1
+        })
+    }
+    
+    // ================ SEQUES==========
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
+        let controller = segue.destinationViewController as! selectedViewController
+        if segue.identifier == "selected"{
+            print("testerino pizzarino")
+            
+        }
+        else{
+            assert(false , "Shouldn't see this, unrecognized segue : \(segue.identifier)")
+        }
+
+    }
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print("potato")
+        self.performSegueWithIdentifier("selected", sender: self)
+    }
+    /*func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        highlightCell(indexPath, flag: true)
+        
+    }
+
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        highlightCell(indexPath, flag: false)
+    }*/
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        highlightCell(indexPath, flag: false)
+        print("highlight")
+    }
+    func highlightCell(indexPath : NSIndexPath, flag: Bool) {
+        
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        
+        if flag {
+            cell?.contentView.backgroundColor = UIColor.magentaColor()
+        } else {
+            cell?.contentView.backgroundColor = nil
+        }
+    }
 }
