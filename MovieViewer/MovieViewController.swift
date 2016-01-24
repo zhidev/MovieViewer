@@ -194,10 +194,10 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         })
         collectionView.reloadData()
     }
-    
+    /* // TODO create first responder to make keyboard come otu when begin editting in searcdhbar. additional optional
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchBar.becomeFirstResponder()
-    }
+    }*/
     // Check network conenction. Call this everytime we reload data or make a network conenction
     func checkNet(){
         if Reachability.isConnectedToNetwork() == true {
