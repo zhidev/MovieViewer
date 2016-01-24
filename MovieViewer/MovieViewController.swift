@@ -107,7 +107,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
             },
             failure: { (imageRequest, imageResponse, error) -> Void in
                 // do something for the failure condition can leave this for now
-                //maybe use place holder image
+                // maybe use place holder image 
         })
         
         return cell
