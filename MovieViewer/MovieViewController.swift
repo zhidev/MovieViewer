@@ -10,10 +10,15 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MovieViewController: UIViewController, UICollectionViewDataSource { //, UISearchBarDelegate {
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var collectionView: UICollectionView!
+    
     var movies: [NSDictionary]?
+    
+    //  For Search Filter
+    //  Actually I dont think we even need this. TBD
+    //var filteredMovies: [NSDictionary]? // TODO : Optional? Force Unwrap? ???? lets leave this here in case we need to change
     
     let baseUrl = "http://image.tmdb.org/t/p/w500"
     let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
@@ -23,9 +28,15 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-
+        //TODOtableView.delegate = self
+        //TODOtableView.dataSource = self
+        collectionView.dataSource = self
+        //  For search bar later
+        
+        //searchBar.delegate = self
+        
+        
+        
         /* Condensed to MARK 1 and 2 */
         let request = createURL()
         dataCall(request)
@@ -35,7 +46,7 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
-        tableView.insertSubview(refreshControl, atIndex: 0)
+        collectionView.insertSubview(refreshControl, atIndex: 0)
 
         
     }
@@ -44,7 +55,9 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.didReceiveMemoryWarning()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let movies = movies {
             return movies.count
         }
@@ -54,21 +67,23 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCCell
         let movie = movies![indexPath.row]
-        let title = movie["title"] as! String
-        let overview = movie["overview"] as! String
+        /*let title = movie["title"] as! String
+        let overview = movie["overview"] as! String*/
         let posterPath = movie["poster_path"] as! String
         
         
         let imageURL = NSURL(string: baseUrl + posterPath)
-    
         
-        cell.titleLabel.text = title
-        cell.overviewLabel.text = overview
+        
+        /*cell.titleLabel.text = title
+        print(title)*/
+        /* cell.overviewLabel.text = overview
+        print(overview) */
         cell.posterView.setImageWithURL(imageURL!)
-                return cell
+        return cell
     }
 
     // MARK: WIP pull down request refresh
@@ -91,7 +106,7 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
                 // Reload the tableView now that there is new data
                 // + Show & Hide HUD and junk
                 MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-                self.tableView.reloadData()
+                self.collectionView.reloadData()
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
                 print("TEST")
                 // Tell the refreshControl to stop spinning
@@ -118,7 +133,7 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
                             
                             
                             self.movies = responseDictionary["results"] as? [NSDictionary]
-                            self.tableView.reloadData()
+                            self.collectionView.reloadData()
                             MBProgressHUD.hideHUDForView(self.view, animated: true)
                     }
                 }
