@@ -88,7 +88,6 @@ class MovieViewController: UIViewController, UICollectionViewDataSource { //, UI
 
     // MARK: WIP pull down request refresh
     func refreshControlAction(refreshControl: UIRefreshControl) {
-        print("MARK TEST")
         // ... Create the NSURLRequest (myRequest) ...
         let request = NSURLRequest(URL: createURL() )
         // Configure session so that completion handler is executed on main UI thread
@@ -108,7 +107,6 @@ class MovieViewController: UIViewController, UICollectionViewDataSource { //, UI
                 MBProgressHUD.showHUDAddedTo(self.view, animated: true)
                 self.collectionView.reloadData()
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
-                print("TEST")
                 // Tell the refreshControl to stop spinning
                 refreshControl.endRefreshing()	
         });
