@@ -212,7 +212,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
             networkBar.hidden = false
         }
     }
-    //Make collection view background pretty
+    //Make collectionview background pretty with gradient
     func setBackgroundGradient(){
         gradientView.backgroundColor = UIColor.blueColor()
         gradientLayer.frame = self.collectionView.bounds
