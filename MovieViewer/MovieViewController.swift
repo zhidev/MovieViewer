@@ -19,9 +19,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     var movies: [NSDictionary]?
     var filteredMovies: [NSDictionary]?
     
-    //  For Search Filter
-    //  Actually I dont think we even need this. TBD
-    //var filteredMovies: [NSDictionary]? // TODO : Optional? Force Unwrap? ???? lets leave this here in case we need to change
+
     
     let baseUrl = "http://image.tmdb.org/t/p/w500"
     let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
@@ -31,8 +29,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TODOtableView.delegate = self
-        //TODOtableView.dataSource = self
+
         collectionView.dataSource = self
         //  For search bar later
         
@@ -75,11 +72,42 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         let movie = filteredMovies![indexPath.row]
         /*let title = movie["title"] as! String
         let overview = movie["overview"] as! String*/
-        let posterPath = movie["poster_path"] as! String
+        
+        if let posterPath = movie["poster_path"] as? String {
+            let imageURL = NSURL(string: baseUrl + posterPath)
+            let imageRequest = NSURLRequest(URL: imageURL!)
+            cell.posterView.setImageWithURLRequest(
+                imageRequest,
+                placeholderImage: nil,
+                success: { (imageRequest, imageResponse, image) -> Void in
+                    
+                    // imageResponse will be nil if the image is cached
+                    if imageResponse != nil {
+                        cell.posterView.alpha = 0.0
+                        cell.posterView.image = image
+                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                            cell.posterView.alpha = 1.0
+                        })
+                    } else {
+                        cell.posterView.image = image
+                    }
+                },
+                failure: { (imageRequest, imageResponse, error) -> Void in
+                    // do something for the failure condition can leave this for now
+                    // maybe use place holder image
+            })
+        }
+        else {
+            // No poster image. Can either set to nil (no image) or a default movie poster image
+            // that you include as an asset
+            cell.posterView.image = nil
+        }
+        
+        //let posterPath = movie["poster_path"] as! String
         
         
-        let imageURL = NSURL(string: baseUrl + posterPath)
-        let imageRequest = NSURLRequest(URL: imageURL!)
+        //let imageURL = NSURL(string: baseUrl + posterPath)
+        //let imageRequest = NSURLRequest(URL: imageURL!)
         
         /*cell.titleLabel.text = title
         print(title)*/
@@ -89,7 +117,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         
         //cell.posterView.setImageWithURL(imageURL!)
         //Changing the ^ to fade in
-        cell.posterView.setImageWithURLRequest(
+        /*cell.posterView.setImageWithURLRequest(
             imageRequest,
             placeholderImage: nil,
             success: { (imageRequest, imageResponse, image) -> Void in
@@ -107,10 +135,11 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
             },
             failure: { (imageRequest, imageResponse, error) -> Void in
                 // do something for the failure condition can leave this for now
-                // maybe use place holder image 
-        })
+                // maybe use place holder image
+        })*/
         
         return cell
+        
     }
 
     // MARK: WIP pull down request refresh
