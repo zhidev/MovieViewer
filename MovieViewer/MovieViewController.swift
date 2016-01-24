@@ -79,13 +79,37 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         
         
         let imageURL = NSURL(string: baseUrl + posterPath)
-        
+        let imageRequest = NSURLRequest(URL: imageURL!)
         
         /*cell.titleLabel.text = title
         print(title)*/
         /* cell.overviewLabel.text = overview
         print(overview) */
-        cell.posterView.setImageWithURL(imageURL!)
+        
+        
+        //cell.posterView.setImageWithURL(imageURL!)
+        //Changing the ^ to fade in
+        cell.posterView.setImageWithURLRequest(
+            imageRequest,
+            placeholderImage: nil,
+            success: { (imageRequest, imageResponse, image) -> Void in
+                
+                // imageResponse will be nil if the image is cached
+                if imageResponse != nil {
+                    cell.posterView.alpha = 0.0
+                    cell.posterView.image = image
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        cell.posterView.alpha = 1.0
+                    })
+                } else {
+                    cell.posterView.image = image
+                }
+            },
+            failure: { (imageRequest, imageResponse, error) -> Void in
+                // do something for the failure condition can leave this for now
+                //maybe use place holder image
+        })
+        
         return cell
     }
 
@@ -167,5 +191,9 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
             return false
         })
         collectionView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.becomeFirstResponder()
     }
 }
