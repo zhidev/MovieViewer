@@ -37,7 +37,7 @@ The following storyboards are in mind:
 - [ ] Favorites Tab
 - [ ] Remember what movie was selected and place so user doesn't have to scroll down again
 - [ ] More cosmetics for MovieSelectedViewController (ie fading images in, sliding in text, etc.)
-
+- [ ] Mirror collectionVew to tableView
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
