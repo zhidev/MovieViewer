@@ -2,7 +2,7 @@ Movie Viewer is a movies app using the [The Movie Database API](http://docs.them
 
 Time spent: 3 hours 40 minutes spent in total for required and optional
 
-Time spent on additional: 2hour 20
+Time spent on additional: 2hour 40
 
 
 ## User Stories
@@ -42,7 +42,7 @@ The following storyboards are in mind:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/G7Aqr04.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
