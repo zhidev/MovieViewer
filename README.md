@@ -1,7 +1,7 @@
 Movie Viewer is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
 Time spent: 3 hours 40 minutes spent in total for required and optional
-
+Time spent on additional: 1hour
 ## User Stories
 
 The following **required** functionality is complete:
@@ -22,7 +22,9 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
-
+- [x] Searchbar and keyboard fades out when user taps elsewhere
+- [ ] Transitions from Collection View to displaying Movie information
+- [ ] Switching between Collection View and Table View
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
