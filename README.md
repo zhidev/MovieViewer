@@ -48,7 +48,13 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+-No auto-layout made some of the spacing really weird, for example tableview doesnt occupy the full simulator window
+-CollectionView not working as intended for initiating a segue transition, unsure if its limited to collectionViews only or tableViews will experiment more later at my leisure, but the method didselectitematindexpath isnt working as intuitively as I thought
+-Lots of fancy ways to create graphical art programmatically
+-Adding a nav bar seems to complicate the view controllers or there were certain intuitive interactions I did that created issues later on
+
+Biggest difficulty: Getting the collectionView to perform a segue while theres a view used as a background. I may have overcomplicated this step and the solutions found online seems too time consuming to tackle before getting other faster storyboards done with
+
 
 ## License
 
