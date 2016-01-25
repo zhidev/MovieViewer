@@ -9,7 +9,7 @@
 import UIKit
 
 class selectedViewController: UIViewController {
-    @IBOutlet var posterImage: UIImageView!
+    @IBOutlet var posterView: UIImageView!
     @IBOutlet var titleLabel: UITextView!
 
     @IBOutlet var overviewLabel: UITextView!

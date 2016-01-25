@@ -35,7 +35,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         super.viewDidLoad()
         print("test")
 
-        //setBackgroundGradient()
+        setBackgroundGradient()
         
         networkBar.hidden = true
         
@@ -188,7 +188,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         dataCall(request)
     }
     
-    //  Search Bar stuff (Need to pull up keyboard maybe)
+    //  Search Bar stuff
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         filteredMovies = searchText.isEmpty ? movies : movies?.filter({ (movies: NSDictionary) -> Bool in
             if let title = movies["title"] as? String {
@@ -244,10 +244,13 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     
     // ================ SEQUES==========
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
-        let controller = segue.destinationViewController as! selectedViewController
         if segue.identifier == "selected"{
+            let controller = segue.destinationViewController as! selectedViewController
+
             print("testerino pizzarino")
             
+        }
+        if segue.identifier == "tableview"{
         }
         else{
             assert(false , "Shouldn't see this, unrecognized segue : \(segue.identifier)")
@@ -259,14 +262,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         print("potato")
         self.performSegueWithIdentifier("selected", sender: self)
     }
-    /*func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        highlightCell(indexPath, flag: true)
-        
-    }
 
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        highlightCell(indexPath, flag: false)
-    }*/
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         highlightCell(indexPath, flag: false)
         print("highlight")

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Color{
+public class Color{
     class func makeLayer(rect: CGRect ) -> CAGradientLayer {
         let gradientLayer = CAGradientLayer()
 
