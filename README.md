@@ -1,7 +1,10 @@
 Movie Viewer is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
 Time spent: 3 hours 40 minutes spent in total for required and optional
-Time spent on additional: 1hour
+
+Time spent on additional: 2hour 20
+
+
 ## User Stories
 
 The following **required** functionality is complete:
@@ -24,7 +27,17 @@ The following **additional** features are implemented:
 - [ ] List anything else that you can get done to improve the app functionality!
 - [x] Searchbar and keyboard fades out when user taps elsewhere
 - [ ] Transitions from Collection View to displaying Movie information
-- [ ] Switching between Collection View and Table View
+    *in progress 
+- [x] Switching between Collection View and Table View
+- [x] Hide searchbar by clicking elsewhere
+- [x] Fades searchbar in while doing a pull to refresh
+
+The following storyboards are in mind:
+- [ ] Keep a static gradient background for tableview cells while scrolling
+- [ ] Favorites Tab
+- [ ] Remember what movie was selected and place so user doesn't have to scroll down again
+- [ ] More cosmetics for MovieSelectedViewController (ie fading images in, sliding in text, etc.)
+
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
