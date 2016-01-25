@@ -16,7 +16,6 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     @IBOutlet var collectionView: UICollectionView!
     
     @IBOutlet var gradientView: UIView!
-    //let gradientLayer = CAGradientLayer()
     
     @IBOutlet var networkBar: UITextView!
     @IBOutlet var searchBar: UISearchBar!
