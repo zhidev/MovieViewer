@@ -244,7 +244,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     // ================ SEQUES==========
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
         if segue.identifier == "selected"{
-            let controller = segue.destinationViewController as! selectedViewController
+            //let controller = segue.destinationViewController as! selectedViewController
 
             print("testerino pizzarino")
             
@@ -252,7 +252,8 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         if segue.identifier == "tableview"{
         }
         else{
-            assert(false , "Shouldn't see this, unrecognized segue : \(segue.identifier)")
+            //assert(false , "Shouldn't see this, unrecognized segue : \(segue.identifier)")
+            print("potato")
         }
 
     }

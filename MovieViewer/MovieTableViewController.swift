@@ -54,17 +54,13 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         let movie = filteredtmovies![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
-        
-        let posterPath = movie["poster_path"] as! String
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
         
-        let baseUrl = "http://image.tmdb.org/t/p/w500"
-        let imageUrl = NSURL(string: baseUrl + posterPath)
-        
-        cell.posterView.setImageWithURL(imageUrl!)
-        
-        print("row: \(indexPath.row)")
+        if let posterPath = movie["poster_path"] as? String{
+            let imageUrl = NSURL(string: baseUrl + posterPath)
+            cell.posterView.setImageWithURL(imageUrl!)
+        }
         return cell
     }
     
@@ -145,5 +141,15 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
             return false
         })
         tableView.reloadData()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPathForCell(cell)
+        print("fish")
+        let movie = filteredtmovies![indexPath!.row]
+        
+        let detailViewController = segue.destinationViewController as! selectedViewController
+        detailViewController.movie = movie
     }
 }
