@@ -1,7 +1,10 @@
 Movie Viewer is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
 Time spent: 3 hours 40 minutes spent in total for required and optional
-Time spent on additional: 1hour
+
+Time spent on additional: 2hour 40
+
+
 ## User Stories
 
 The following **required** functionality is complete:
@@ -24,18 +27,34 @@ The following **additional** features are implemented:
 - [ ] List anything else that you can get done to improve the app functionality!
 - [x] Searchbar and keyboard fades out when user taps elsewhere
 - [ ] Transitions from Collection View to displaying Movie information
-- [ ] Switching between Collection View and Table View
+    *in progress 
+- [x] Switching between Collection View and Table View
+- [x] Hide searchbar by clicking elsewhere
+- [x] Fades searchbar in while doing a pull to refresh
+
+The following storyboards are in mind:
+- [ ] Keep a static gradient background for tableview cells while scrolling
+- [ ] Favorites Tab
+- [ ] Remember what movie was selected and place so user doesn't have to scroll down again
+- [ ] More cosmetics for MovieSelectedViewController (ie fading images in, sliding in text, etc.)
+- [ ] Mirror collectionVew to tableView
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/G7Aqr04.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+-No auto-layout made some of the spacing really weird, for example tableview doesnt occupy the full simulator window
+-CollectionView not working as intended for initiating a segue transition, unsure if its limited to collectionViews only or tableViews will experiment more later at my leisure, but the method didselectitematindexpath isnt working as intuitively as I thought
+-Lots of fancy ways to create graphical art programmatically
+-Adding a nav bar seems to complicate the view controllers or there were certain intuitive interactions I did that created issues later on
+
+Biggest difficulty: Getting the collectionView to perform a segue while theres a view used as a background. I may have overcomplicated this step and the solutions found online seems too time consuming to tackle before getting other faster storyboards done with
+
 
 ## License
 
