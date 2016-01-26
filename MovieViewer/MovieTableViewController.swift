@@ -93,9 +93,7 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
             completionHandler: { (dataOrNil, response, error) in
                 if let data = dataOrNil {
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
-                        data, options:[]) as? NSDictionary {
-                            print("response: \(responseDictionary)")
-                            
+                        data, options:[]) as? NSDictionary {                            
                             self.filteredtmovies = responseDictionary["results"] as? [NSDictionary]
                             self.tableView.reloadData()
                             MBProgressHUD.hideHUDForView(self.view, animated: true)
