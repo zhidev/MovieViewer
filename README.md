@@ -79,7 +79,7 @@ Week 2
 The following **required** functionality is complete:
 - [x] User can view movie details by tapping on a cell.
 - [x] User can select from a tab bar for either Now Playing or Top Rated movies. *
-- [ ] Customize the selection effect of the cell.
+- [x] Customize the selection effect of the cell.
 
 * Instead of making 2 of the same type of View Controllers for Now Playing and Top Rated, 
 I put two different view controller one containing a tableview and one containing a collection
