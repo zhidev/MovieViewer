@@ -91,6 +91,6 @@ and feels more natural to me.
 The following **optional** features are implemented:
 - [ ] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
 - [ ] Customize the navigation bar.
-- [ ] Add in any optionals you didn't finish from last week.
+- [x] Add in any optionals you didn't finish from last week.
 
 The following **additional** features are implemented:
