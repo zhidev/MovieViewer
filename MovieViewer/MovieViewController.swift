@@ -61,9 +61,6 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.insertSubview(refreshControl, atIndex: 0)
 	
-        //Looks for single or multiple taps.
-        //let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "closeSearchbar")
-        //view.addGestureRecognizer(tap)
         
     }
 
@@ -208,10 +205,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         })
         collectionView.reloadData()
     }
-     // TODO create first responder to make keyboard come otu when begin editting in searcdhbar. additional optional
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
 
-    }
     // Check network conenction. Call this everytime we reload data or make a network conenction
     func checkNet(){
         if Reachability.isConnectedToNetwork() == true {

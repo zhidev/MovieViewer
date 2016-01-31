@@ -10,7 +10,7 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MovieTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MovieTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     @IBOutlet var tableView: UITableView!
 
     var tmovies: [NSDictionary]?
@@ -19,13 +19,27 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
     let baseUrl = "http://image.tmdb.org/t/p/w500"
     let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
     
+    var showSearch = false
+    
+    @IBOutlet var searchBar: UISearchBar!
+    //@IBOutlet var networkBar: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        //setBackgroundGradient()
+       // networkBar.hidden = true
+        
+        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "navSearch"), animated: true)
+        
+        closeSearchbar()
+        
         tableView.dataSource = self
         tableView.delegate = self
         
         print("TableView Test")
+        
+        searchBar.delegate = self
         
         createTable()
 
@@ -91,7 +105,8 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
             completionHandler: { (dataOrNil, response, error) in
                 if let data = dataOrNil {
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
-                        data, options:[]) as? NSDictionary {                            
+                        data, options:[]) as? NSDictionary {
+                            self.tmovies = responseDictionary["results"] as? [NSDictionary]
                             self.filteredtmovies = responseDictionary["results"] as? [NSDictionary]
                             self.tableView.reloadData()
                             MBProgressHUD.hideHUDForView(self.view, animated: true)
@@ -126,24 +141,10 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
                 refreshControl.endRefreshing()
         });
         task.resume()
-        //showSearchbar()
         //checkNet()
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredtmovies = searchText.isEmpty ? tmovies : tmovies?.filter({ (movies: NSDictionary) -> Bool in
-            if let title = movies["title"] as? String {
-                if title.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil {
-                    return true
-                }
-                else{
-                    return false
-                }
-            }
-            return false
-        })
-        tableView.reloadData()
-    }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let cell = sender as! UITableViewCell
@@ -161,4 +162,69 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         print(detailViewController)
         }
     }
+    
+    //Make tableview background pretty with gradient
+    /*func setBackgroundGradient(){
+        let rect = self.tableView.bounds
+        let layer = Color.makeLayer(rect)
+        self.bgView.layer.addSublayer(layer)
+        self.tableView.layer.addSublayer(layer)
+        self.tableView.backgroundView?.addSubview(bgView)
+    }*/
+    
+    /*func checkNet(){
+        if Reachability.isConnectedToNetwork() == true {
+            networkBar.hidden = true
+        } else {
+            networkBar.hidden = false
+        }
+    }*/
+    
+    //  Search Bar stuff
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredtmovies = searchText.isEmpty ? tmovies : tmovies?.filter({ (tmovies: NSDictionary) -> Bool in
+            if let title = tmovies["title"] as? String {
+                if title.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil {
+                    return true
+                }
+                else{
+                    return false
+                }
+            }
+            return false
+        })
+        tableView.reloadData()
+    }
+    
+    //Calls this function when the nav search button is recognized.
+    func navSearch(){
+        showSearch = !showSearch
+        if( showSearch){
+            showSearchbar()
+        }
+        else{
+            closeSearchbar()
+        }
+    }
+    
+    func closeSearchbar() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        searchBar.endEditing(true)
+        //searchBar.hidden = true
+        UIView.animateWithDuration(0.4, animations: {
+            self.searchBar.alpha = 0
+        })
+        print("search hide")
+        searchBar.resignFirstResponder()
+        
+    }
+    func showSearchbar(){
+        //searchBar.hidden = false
+        print("search show")
+        UIView.animateWithDuration(0.4, animations: {
+            self.searchBar.alpha = 1
+        })
+        searchBar.becomeFirstResponder()
+    }
+
 }
