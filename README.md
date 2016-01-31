@@ -84,7 +84,7 @@ The following **required** functionality is complete:
 * Instead of making 2 of the same type of View Controllers for Now Playing and Top Rated, 
 I put two different view controller one containing a tableview and one containing a collection
 view. Since this applies the same concept and techniques as mentioned I figured this is okay
-and feels more natural to me.
+and feels more natural to me. As for the top rated + now playing portions, refer to additional
 
 
 
@@ -94,3 +94,4 @@ The following **optional** features are implemented:
 - [x] Add in any optionals you didn't finish from last week.
 
 The following **additional** features are implemented:
+- [ ] Moved Now Playing and Top Rated switching to a segmented control
