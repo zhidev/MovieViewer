@@ -16,6 +16,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let collectionNavigationController = storyboard.instantiateViewControllerWithIdentifier("CollectionNav") as! UINavigationController
+        let movViewController = collectionNavigationController.topViewController as! MovieViewController
+        collectionNavigationController.tabBarItem.title = "Collection View"
+        
+        let tableNavigationController = storyboard.instantiateViewControllerWithIdentifier("TableNav") as! UINavigationController
+        let tableViewController = tableNavigationController.topViewController as! MovieTableViewController
+        tableNavigationController.tabBarItem.title = "Table View"
+        
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [collectionNavigationController, tableNavigationController]
+        
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+
+
+        
         return true
     }
 

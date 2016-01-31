@@ -25,6 +25,8 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         tableView.dataSource = self
         tableView.delegate = self
         
+        print("TableView Test")
+        
         createTable()
 
         
@@ -146,10 +148,17 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let cell = sender as! UITableViewCell
         let indexPath = tableView.indexPathForCell(cell)
+        if(segue.identifier == "tselected"){
+            print("tselected segue test")
+        
         print("fish")
         let movie = filteredtmovies![indexPath!.row]
-        
+        print("fish potato")
         let detailViewController = segue.destinationViewController as! selectedViewController
+        print("fishy potato fish")
         detailViewController.movie = movie
+        print("taco")
+        print(detailViewController)
+        }
     }
 }

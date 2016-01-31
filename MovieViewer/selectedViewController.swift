@@ -12,6 +12,9 @@ class selectedViewController: UIViewController {
     @IBOutlet var posterView: UIImageView!
     @IBOutlet var overviewLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var infoView: UIView!
+    
     
     let baseUrl = "http://image.tmdb.org/t/p/w500"
 
@@ -21,6 +24,8 @@ class selectedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("test in 2nd segue")
+        
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
         
         let title = movie["title"] as? String
         titleLabel.text = title

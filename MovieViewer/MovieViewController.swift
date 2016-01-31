@@ -20,6 +20,9 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     @IBOutlet var networkBar: UITextView!
     @IBOutlet var searchBar: UISearchBar!
     
+    var endpoint: String!
+    var showSearch = false
+    
     var movies: [NSDictionary]?
     var filteredMovies: [NSDictionary]?
     
@@ -32,10 +35,13 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("test")
-
-        setBackgroundGradient()
+        print("CollectionView test")
         
+        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "navSearch"), animated: true)
+
+        
+        closeSearchbar()
+        setBackgroundGradient()
         networkBar.hidden = true
         
 
@@ -56,8 +62,8 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         collectionView.insertSubview(refreshControl, atIndex: 0)
 	
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "closeSearchbar")
-        view.addGestureRecognizer(tap)
+        //let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "closeSearchbar")
+        //view.addGestureRecognizer(tap)
         
     }
 
@@ -140,7 +146,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
                 refreshControl.endRefreshing()	
         });
         task.resume()
-        showSearchbar()
+        //showSearchbar()
         checkNet()
     }
     
@@ -222,7 +228,17 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     }
     
     
-    //Calls this function when the tap is recognized.
+    //Calls this function when the nav search button is recognized.
+    func navSearch(){
+        showSearch = !showSearch
+        if( showSearch){
+            showSearchbar()
+        }
+        else{
+            closeSearchbar()
+        }
+    }
+    
     func closeSearchbar() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         searchBar.endEditing(true)
@@ -231,6 +247,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
             self.searchBar.alpha = 0
         })
         print("search hide")
+        searchBar.resignFirstResponder()
         
     }
     func showSearchbar(){
@@ -239,11 +256,12 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         UIView.animateWithDuration(0.4, animations: {
             self.searchBar.alpha = 1
         })
+        searchBar.becomeFirstResponder()
     }
     
     // ================ SEQUES==========
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
-        if segue.identifier == "selected"{
+    /*override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
+        if segue.identifier == "cselected"{
             //let controller = segue.destinationViewController as! selectedViewController
 
             print("testerino pizzarino")
@@ -256,7 +274,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
             print("potato")
         }
 
-    }
+    }*/
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print("potato")
