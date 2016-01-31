@@ -44,6 +44,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="posterView" destination="Wf6-NO-Gr6" id="TQF-Fa-g8s"/>
+                                            <segue destination="IUf-JC-A99" kind="push" identifier="cselected" id="BOw-Mz-xv8"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -71,27 +72,11 @@
                         <outlet property="gradientView" destination="3UB-x4-Sm8" id="c6I-Wa-bOR"/>
                         <outlet property="networkBar" destination="Y0N-fl-LD5" id="9Hg-uf-Qf9"/>
                         <outlet property="searchBar" destination="hp8-p7-Pmz" id="b3B-aw-09u"/>
-                        <segue destination="Fid-vY-8DE" kind="push" identifier="selected" id="ssa-xC-0H0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1536" y="105"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="fat-fa-GCU">
-            <objects>
-                <viewController id="Fid-vY-8DE" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PoW-l0-nYH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="sqk-fK-j3C"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mQL-dr-Jrx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1927" y="23"/>
         </scene>
         <!--Movie Table View Controller-->
         <scene sceneID="DaK-jV-jcI">
@@ -161,7 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jjl-fE-v4T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1669" y="740"/>
+            <point key="canvasLocation" x="1616" y="786"/>
         </scene>
         <!--Selected View Controller-->
         <scene sceneID="4JD-zJ-5AZ">
@@ -216,7 +201,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pG7-bO-K4F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2388" y="631"/>
+            <point key="canvasLocation" x="1954" y="214"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FdZ-NH-6RY">
@@ -255,4 +240,7 @@
             <point key="canvasLocation" x="1137" y="740"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="BOw-Mz-xv8"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -270,9 +270,21 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
 
     }*/
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    /*func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print("potato")
-        self.performSegueWithIdentifier("selected", sender: self)
+        
+        self.performSegueWithIdentifier("cselected", sender: self)
+        
+    }*/
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! UICollectionViewCell
+        let indexPath = collectionView.indexPathForCell(cell)
+        if(segue.identifier == "cselected"){
+            print("cselected")
+            let movie = filteredMovies![indexPath!.row]
+            let detailViewController = segue.destinationViewController as! selectedViewController
+            detailViewController.movie = movie
+        }
     }
 
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
