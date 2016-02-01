@@ -24,10 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let collectionNavigationController = storyboard.instantiateViewControllerWithIdentifier("CollectionNav") as! UINavigationController
         let movViewController = collectionNavigationController.topViewController as! MovieViewController
         collectionNavigationController.tabBarItem.title = "Collection View"
+        collectionNavigationController.tabBarItem.image = UIImage(named: "collectionView")
         
         let tableNavigationController = storyboard.instantiateViewControllerWithIdentifier("TableNav") as! UINavigationController
         let tableViewController = tableNavigationController.topViewController as! MovieTableViewController
         tableNavigationController.tabBarItem.title = "Table View"
+        tableNavigationController.tabBarItem.image = UIImage(named: "tableView")
         
         
         let tabBarController = UITabBarController()

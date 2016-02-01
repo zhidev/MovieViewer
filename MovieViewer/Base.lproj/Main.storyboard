@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--Movie View Controller-->
+        <!--Collection View-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MovieViewController" customModule="MovieViewer" customModuleProvider="target" sceneMemberID="viewController">
@@ -77,7 +77,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="gJ7-6z-hKG"/>
+                    <navigationItem key="navigationItem" title="Collection View" id="gJ7-6z-hKG"/>
                     <connections>
                         <outlet property="collectionView" destination="OkH-SY-gRl" id="Gu3-Ld-cJL"/>
                         <outlet property="gradientView" destination="3UB-x4-Sm8" id="c6I-Wa-bOR"/>
@@ -90,7 +90,7 @@
             </objects>
             <point key="canvasLocation" x="1536" y="105"/>
         </scene>
-        <!--Movie Table View Controller-->
+        <!--Table View-->
         <scene sceneID="DaK-jV-jcI">
             <objects>
                 <viewController id="Mvj-Z4-fue" customClass="MovieTableViewController" customModule="MovieViewer" customModuleProvider="target" sceneMemberID="viewController">
@@ -163,7 +163,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="IoW-CN-v4u"/>
+                    <navigationItem key="navigationItem" title="Table View" id="IoW-CN-v4u"/>
                     <connections>
                         <outlet property="bgView" destination="asb-Y5-u86" id="WII-gC-bBH"/>
                         <outlet property="searchBar" destination="Hok-2K-Bvl" id="vPy-aN-yPj"/>
@@ -175,21 +175,7 @@
             </objects>
             <point key="canvasLocation" x="1616" y="786"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="F99-yk-5zv">
-            <objects>
-                <viewController id="Ibr-AE-p3l" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mOB-Kl-nZk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q5a-NP-pYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2009" y="1076"/>
-        </scene>
-        <!--Selected View Controller-->
+        <!--Detailed View-->
         <scene sceneID="4JD-zJ-5AZ">
             <objects>
                 <viewController id="IUf-JC-A99" customClass="selectedViewController" customModule="MovieViewer" customModuleProvider="target" sceneMemberID="viewController">
@@ -234,7 +220,7 @@
                             </scrollView>
                         </subviews>
                     </view>
-                    <navigationItem key="navigationItem" id="Ose-ZN-jxK"/>
+                    <navigationItem key="navigationItem" title="Detailed View" id="Ose-ZN-jxK"/>
                     <connections>
                         <outlet property="bgView" destination="gxa-PL-jgO" id="XF4-cb-yjn"/>
                         <outlet property="infoView" destination="xcO-tZ-jeH" id="bNm-h4-tHa"/>

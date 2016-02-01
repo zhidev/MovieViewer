@@ -85,29 +85,54 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCCell
         
         checkNet()
+        //Low res + high res images
+        let low_resolution = "https://image.tmdb.org/t/p/w45"
+        let high_resolution = "https://image.tmdb.org/t/p/original"
         
         let movie = filteredMovies![indexPath.row]
         if let posterPath = movie["poster_path"] as? String {
-            let imageURL = NSURL(string: baseUrl + posterPath)
-            let imageRequest = NSURLRequest(URL: imageURL!)
+            let lowRes = NSURL(string: low_resolution + posterPath)
+            let highRes = NSURL(string: high_resolution + posterPath)
+            
+            //let imageURL = NSURL(string: baseUrl + posterPath)
+            //let imageRequest = NSURLRequest(URL: imageURL!)
+            let lowImageRequest = NSURLRequest(URL: lowRes!)
+            let highImageRequest = NSURLRequest(URL: highRes!)
             cell.posterView.setImageWithURLRequest(
-                imageRequest,
+                lowImageRequest,
                 placeholderImage: nil,
-                success: { (imageRequest, imageResponse, image) -> Void in
-                    // imageResponse will be nil if the image is cached
-                    if imageResponse != nil {
-                        cell.posterView.alpha = 0.0
-                        cell.posterView.image = image
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            cell.posterView.alpha = 1.0
-                        })
-                    } else {
-                        cell.posterView.image = image
-                    }
+                success: { (lowImageRequest, lowImageResponse, lowImage) -> Void in
+                    
+                    // smallImageResponse will be nil if the smallImage is already available
+                    // in cache (might want to do something smarter in that case).
+                    cell.posterView.alpha = 0.0
+                    cell.posterView.image = lowImage;
+                    
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        
+                        cell.posterView.alpha = 1.0
+                        
+                        }, completion: { (sucess) -> Void in
+                            
+                            // The AFNetworking ImageView Category only allows one request to be sent at a time
+                            // per ImageView. This code must be in the completion block.
+                            cell.posterView.setImageWithURLRequest(
+                                highImageRequest,
+                                placeholderImage: lowImage,
+                                success: { (highImageRequest, highImageResponse, highImage) -> Void in
+                                    
+                                    cell.posterView.image = highImage;
+                                    
+                                },
+                                failure: { (request, response, error) -> Void in
+                                    // do something for the failure condition of the large image request
+                                    // possibly setting the ImageView's image to a default image
+                            })
+                    })
                 },
-                failure: { (imageRequest, imageResponse, error) -> Void in
-                    // do something for the failure condition can leave this for now
-                    // maybe use place holder image
+                failure: { (request, response, error) -> Void in
+                    // do something for the failure condition
+                    // possibly try to get the large image
             })
         }
         else {
@@ -257,28 +282,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     }
     
     // ================ SEQUES==========
-    /*override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
-        if segue.identifier == "cselected"{
-            //let controller = segue.destinationViewController as! selectedViewController
 
-            print("testerino pizzarino")
-            
-        }
-        if segue.identifier == "tableview"{
-        }
-        else{
-            //assert(false , "Shouldn't see this, unrecognized segue : \(segue.identifier)")
-            print("potato")
-        }
-
-    }*/
-
-    /*func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print("potato")
-        
-        self.performSegueWithIdentifier("cselected", sender: self)
-        
-    }*/
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let cell = sender as! UICollectionViewCell
         let indexPath = collectionView.indexPathForCell(cell)

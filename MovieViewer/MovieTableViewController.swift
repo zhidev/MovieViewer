@@ -77,12 +77,62 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
         
-        if let posterPath = movie["poster_path"] as? String{
-            let imageUrl = NSURL(string: baseUrl + posterPath)
-            cell.posterView.setImageWithURL(imageUrl!)
+        //Low res + high res images
+        let low_resolution = "https://image.tmdb.org/t/p/w45"
+        let high_resolution = "https://image.tmdb.org/t/p/original"
+        
+        if let posterPath = movie["poster_path"] as? String {
+            let lowRes = NSURL(string: low_resolution + posterPath)
+            let highRes = NSURL(string: high_resolution + posterPath)
+            
+            //let imageURL = NSURL(string: baseUrl + posterPath)
+            //let imageRequest = NSURLRequest(URL: imageURL!)
+            let lowImageRequest = NSURLRequest(URL: lowRes!)
+            let highImageRequest = NSURLRequest(URL: highRes!)
+            cell.posterView.setImageWithURLRequest(
+                lowImageRequest,
+                placeholderImage: nil,
+                success: { (lowImageRequest, lowImageResponse, lowImage) -> Void in
+                    
+                    // smallImageResponse will be nil if the smallImage is already available
+                    // in cache (might want to do something smarter in that case).
+                    cell.posterView.alpha = 0.0
+                    cell.posterView.image = lowImage;
+                    
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        
+                        cell.posterView.alpha = 1.0
+                        
+                        }, completion: { (sucess) -> Void in
+                            
+                            // The AFNetworking ImageView Category only allows one request to be sent at a time
+                            // per ImageView. This code must be in the completion block.
+                            cell.posterView.setImageWithURLRequest(
+                                highImageRequest,
+                                placeholderImage: lowImage,
+                                success: { (highImageRequest, highImageResponse, highImage) -> Void in
+                                    
+                                    cell.posterView.image = highImage;
+                                    
+                                },
+                                failure: { (request, response, error) -> Void in
+                                    // do something for the failure condition of the large image request
+                                    // possibly setting the ImageView's image to a default image
+                            })
+                    })
+                },
+                failure: { (request, response, error) -> Void in
+                    // do something for the failure condition
+                    // possibly try to get the large image
+            })
         }
-        //cell.backgroundView = nil
-        //cell.backgroundColor = UIColor.clearColor()
+        else {
+            // No poster image. Can either set to nil (no image) or a default movie poster image
+            // that you include as an asset
+            cell.posterView.image = nil
+        }
+        
+        
         return cell
     }
     
@@ -166,17 +216,11 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         let cell = sender as! UITableViewCell
         let indexPath = tableView.indexPathForCell(cell)
         if(segue.identifier == "tselected"){
-            print("tselected segue test")
         
-        print("fish")
-        let movie = filteredtmovies![indexPath!.row]
-        print("fish potato")
-        let detailViewController = segue.destinationViewController as! selectedViewController
-        print("fishy potato fish")
-        detailViewController.movie = movie
-        detailViewController.theme = "dark"
-        print("taco")
-        print(detailViewController)
+            let movie = filteredtmovies![indexPath!.row]
+            let detailViewController = segue.destinationViewController as! selectedViewController
+            detailViewController.movie = movie
+            detailViewController.theme = "dark"
         }
     }
     
