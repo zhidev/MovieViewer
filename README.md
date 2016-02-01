@@ -38,7 +38,8 @@ The following storyboards are in mind:
 - [ ] Remember what movie was selected and place so user doesn't have to scroll down again
 - [ ] More cosmetics for MovieSelectedViewController (ie fading images in, sliding in text, etc.)
 - [x] Mirror collectionVew to tableView
-- 
+
+
 
 
 ## Video Walkthrough 
