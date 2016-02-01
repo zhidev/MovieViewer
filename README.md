@@ -26,8 +26,7 @@ The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
 - [x] Searchbar and keyboard fades out when user taps elsewhere
-- [ ] Transitions from Collection View to displaying Movie information
-    *in progress 
+- [x] Transitions from Collection View to displaying Movie information
 - [x] Switching between Collection View and Table View
 - [x] Hide searchbar by clicking elsewhere
 - [x] Fades searchbar in while doing a pull to refresh
@@ -35,7 +34,7 @@ The following **additional** features are implemented:
 The following storyboards are in mind:
 - [ ] Keep a static gradient background for tableview cells while scrolling
 - [ ] Favorites Tab
-- [ ] Remember what movie was selected and place so user doesn't have to scroll down again
+- [x] Remember what movie was selected and place so user doesn't have to scroll down again
 - [ ] More cosmetics for MovieSelectedViewController (ie fading images in, sliding in text, etc.)
 - [x] Mirror collectionVew to tableView
 
@@ -80,8 +79,8 @@ Biggest difficulty: Getting the collectionView to perform a segue while theres a
 =====================================================================================
 Week 2
 Time Spent:
-Required + Optional: 2 Hours 30 minutes
-Additional:
+Required + Optional: 3 Hours 10 minutes
+Additional: 40 minutes
 
 
 The following **required** functionality is complete:
@@ -97,11 +96,21 @@ and feels more natural to me. As for the top rated + now playing portions, refer
 
 
 The following **optional** features are implemented:
-- [ ] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
-- [ ] Customize the navigation bar.
+- [x] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
+- [x] Customize the navigation bar.
 - [x] Add in any optionals you didn't finish from last week.
 
 The following **additional** features are implemented:
 - [x] Moved Now Playing and Top Rated switching to a segmented control
 - [x] Matched background view of detailed movies to keep the same view depending on which 
 view we entered from
+- [x] Hide segmented control with search bar so there isnt over clutter of information
+
+## Video Walkthrough 
+
+Here's a walkthrough of implemented user stories of week 2 of MovieViewer:
+<img src='http://i.imgur.com/jg4KrXa.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+http://i.imgur.com/jg4KrXa.gif
+
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
