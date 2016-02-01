@@ -201,6 +201,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" id="gxa-PL-jgO">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="56d-Nq-10S">
                                         <rect key="frame" x="20" y="30" width="280" height="509"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -229,10 +233,10 @@
                                 </subviews>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ose-ZN-jxK"/>
                     <connections>
+                        <outlet property="bgView" destination="gxa-PL-jgO" id="XF4-cb-yjn"/>
                         <outlet property="infoView" destination="xcO-tZ-jeH" id="bNm-h4-tHa"/>
                         <outlet property="overviewLabel" destination="4Ab-pO-tVa" id="va5-oe-Cdl"/>
                         <outlet property="posterView" destination="56d-Nq-10S" id="y3X-uJ-ckA"/>

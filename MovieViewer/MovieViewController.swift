@@ -220,7 +220,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     //Make collectionview background pretty with gradient
     func setBackgroundGradient(){
         let rect = self.collectionView.bounds
-        let layer = Color.makeLayer(rect)
+        let layer = Color.makeLayer(rect, input: "light")
         self.gradientView.layer.addSublayer(layer)
     }
     
@@ -287,6 +287,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
             let movie = filteredMovies![indexPath!.row]
             let detailViewController = segue.destinationViewController as! selectedViewController
             detailViewController.movie = movie
+            detailViewController.theme = "light"
         }
     }
 

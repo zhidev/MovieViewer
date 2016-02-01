@@ -14,17 +14,19 @@ class selectedViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var infoView: UIView!
+    @IBOutlet var bgView: UIView!
     
     
     let baseUrl = "http://image.tmdb.org/t/p/w500"
 
-    
+    var theme: String?
     var movie: NSDictionary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("test in 2nd segue")
-        
+        setBackgroundGradient()
+
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
         
         let title = movie["title"] as? String
@@ -45,6 +47,10 @@ class selectedViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-
+    func setBackgroundGradient(){
+        let rect = self.bgView.bounds
+        let layer = Color.makeLayer(rect, input: theme!)
+        self.bgView.layer.addSublayer(layer)
+    }
 
 }

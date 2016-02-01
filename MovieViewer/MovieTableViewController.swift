@@ -174,6 +174,7 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         let detailViewController = segue.destinationViewController as! selectedViewController
         print("fishy potato fish")
         detailViewController.movie = movie
+        detailViewController.theme = "dark"
         print("taco")
         print(detailViewController)
         }
