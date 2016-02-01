@@ -111,7 +111,7 @@ view we entered from
 Here's a walkthrough of implemented user stories of week 2 of MovieViewer:
 <img src='http://i.imgur.com/jg4KrXa.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 http://i.imgur.com/jg4KrXa.gif
-![walkthrough](MovieViewer2- Final UI.gif)`
+![walkthrough](MovieViewer2.gif)`
 
 
 
