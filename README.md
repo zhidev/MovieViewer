@@ -71,3 +71,27 @@ Biggest difficulty: Getting the collectionView to perform a segue while theres a
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+
+=====================================================================================
+Week 2
+
+The following **required** functionality is complete:
+- [x] User can view movie details by tapping on a cell.
+- [x] User can select from a tab bar for either Now Playing or Top Rated movies. *
+- [x] Customize the selection effect of the cell.
+
+* Instead of making 2 of the same type of View Controllers for Now Playing and Top Rated, 
+I put two different view controller one containing a tableview and one containing a collection
+view. Since this applies the same concept and techniques as mentioned I figured this is okay
+and feels more natural to me. As for the top rated + now playing portions, refer to additional
+
+
+
+The following **optional** features are implemented:
+- [ ] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
+- [ ] Customize the navigation bar.
+- [x] Add in any optionals you didn't finish from last week.
+
+The following **additional** features are implemented:
+- [ ] Moved Now Playing and Top Rated switching to a segmented control
