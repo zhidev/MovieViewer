@@ -113,9 +113,6 @@ Here's a walkthrough of implemented user stories of week 2 of MovieViewer:
 
 <img src='http://i.imgur.com/G7Aqr04.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-<img src = 'http://i.imgur.com/jg4KrXa.gif' title = 'Potato' width ='' alt='Potato Walkthrough' />
-
-
 http://i.imgur.com/G7Aqr04.gif
 http://i.imgur.com/jg4KrXa.gif
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
