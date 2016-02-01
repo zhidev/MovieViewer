@@ -80,7 +80,7 @@ Biggest difficulty: Getting the collectionView to perform a segue while theres a
 Week 2
 Time Spent:
 Required + Optional: 3 Hours 10 minutes
-Additional: 20 minutes
+Additional: 40 minutes
 
 
 The following **required** functionality is complete:
@@ -112,7 +112,7 @@ Here's a walkthrough of implemented user stories of week 2 of MovieViewer:
 <img src='http://i.imgur.com/jg4KrXa.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <img src='http://i.imgur.com/G7Aqr04.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
+[img]http://i.imgur.com/jg4KrXa.gif[/img]
 http://i.imgur.com/G7Aqr04.gif
 http://i.imgur.com/jg4KrXa.gif
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
