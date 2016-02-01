@@ -26,8 +26,7 @@ The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
 - [x] Searchbar and keyboard fades out when user taps elsewhere
-- [ ] Transitions from Collection View to displaying Movie information
-    *in progress 
+- [x] Transitions from Collection View to displaying Movie information
 - [x] Switching between Collection View and Table View
 - [x] Hide searchbar by clicking elsewhere
 - [x] Fades searchbar in while doing a pull to refresh
