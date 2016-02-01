@@ -75,6 +75,10 @@ Biggest difficulty: Getting the collectionView to perform a segue while theres a
 
 =====================================================================================
 Week 2
+Time Spent:
+Required + Optional: 2 Hours
+Additional:
+
 
 The following **required** functionality is complete:
 - [x] User can view movie details by tapping on a cell.
@@ -94,4 +98,4 @@ The following **optional** features are implemented:
 - [x] Add in any optionals you didn't finish from last week.
 
 The following **additional** features are implemented:
-- [ ] Moved Now Playing and Top Rated switching to a segmented control
+- [x] Moved Now Playing and Top Rated switching to a segmented control
