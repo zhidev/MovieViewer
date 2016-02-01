@@ -25,8 +25,11 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     
     var movies: [NSDictionary]?
     var filteredMovies: [NSDictionary]?
+    @IBOutlet var segmentedControl: UISegmentedControl!
     
-
+    let segmentedControls = ["now_playing", "top_rated"]
+    
+    
     
     let baseUrl = "http://image.tmdb.org/t/p/w500"
     let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
@@ -179,8 +182,8 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     
     // MARK 1
     func createURL() -> NSURL{
-        let urlPath = NSURL( string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
-        
+        let selectedSegment = segmentedControls[segmentedControl.selectedSegmentIndex]
+        let urlPath = NSURL( string: "https://api.themoviedb.org/3/movie/\(selectedSegment)?api_key=\(apiKey)")
         return urlPath!
     }
     
@@ -300,5 +303,8 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         } else {
             cell?.contentView.backgroundColor = nil
         }
+    }
+    @IBAction func valueChange(sender: AnyObject) {
+        createCollection()
     }
 }

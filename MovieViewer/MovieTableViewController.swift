@@ -13,8 +13,12 @@ import MBProgressHUD
 class MovieTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     @IBOutlet var tableView: UITableView!
 
+    @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBOutlet var bgView: UIView!
     var tmovies: [NSDictionary]?
     var filteredtmovies: [NSDictionary]?
+    
+   let segmentedControls = ["now_playing", "top_rated"]
     
     let baseUrl = "http://image.tmdb.org/t/p/w500"
     let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
@@ -77,6 +81,8 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
             let imageUrl = NSURL(string: baseUrl + posterPath)
             cell.posterView.setImageWithURL(imageUrl!)
         }
+        //cell.backgroundView = nil
+        //cell.backgroundColor = UIColor.clearColor()
         return cell
     }
     
@@ -90,7 +96,8 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func createURL() -> NSURL{
-        let urlPath = NSURL( string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let selectedSegment = segmentedControls[segmentedControl.selectedSegmentIndex]
+        let urlPath = NSURL( string: "https://api.themoviedb.org/3/movie/\(selectedSegment)?api_key=\(apiKey)")
         return urlPath!
     }
     
@@ -234,6 +241,9 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
             self.searchBar.alpha = 1
         })
         searchBar.becomeFirstResponder()
+    }
+    @IBAction func valueChange(sender: AnyObject) {
+        createTable()
     }
 
 }
