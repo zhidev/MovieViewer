@@ -104,3 +104,4 @@ The following **additional** features are implemented:
 - [x] Moved Now Playing and Top Rated switching to a segmented control
 - [x] Matched background view of detailed movies to keep the same view depending on which 
 view we entered from
+- [x] Hide segmented control with search bar so there isnt over clutter of information
