@@ -80,8 +80,8 @@ Biggest difficulty: Getting the collectionView to perform a segue while theres a
 =====================================================================================
 Week 2
 Time Spent:
-Required + Optional: 2 Hours 30 minutes
-Additional:
+Required + Optional: 3 Hours 10 minutes
+Additional: 20 minutes
 
 
 The following **required** functionality is complete:
@@ -97,8 +97,8 @@ and feels more natural to me. As for the top rated + now playing portions, refer
 
 
 The following **optional** features are implemented:
-- [ ] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
-- [ ] Customize the navigation bar.
+- [x] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
+- [x] Customize the navigation bar.
 - [x] Add in any optionals you didn't finish from last week.
 
 The following **additional** features are implemented:
