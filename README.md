@@ -37,7 +37,11 @@ The following storyboards are in mind:
 - [ ] Favorites Tab
 - [ ] Remember what movie was selected and place so user doesn't have to scroll down again
 - [ ] More cosmetics for MovieSelectedViewController (ie fading images in, sliding in text, etc.)
-- [ ] Mirror collectionVew to tableView
+- [x] Mirror collectionVew to tableView
+
+
+
+
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
@@ -76,7 +80,7 @@ Biggest difficulty: Getting the collectionView to perform a segue while theres a
 =====================================================================================
 Week 2
 Time Spent:
-Required + Optional: 2 Hours
+Required + Optional: 2 Hours 30 minutes
 Additional:
 
 
@@ -99,3 +103,5 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 - [x] Moved Now Playing and Top Rated switching to a segmented control
+- [x] Matched background view of detailed movies to keep the same view depending on which 
+view we entered from
