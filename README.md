@@ -105,3 +105,11 @@ The following **additional** features are implemented:
 - [x] Matched background view of detailed movies to keep the same view depending on which 
 view we entered from
 - [x] Hide segmented control with search bar so there isnt over clutter of information
+
+## Video Walkthrough 
+
+Here's a walkthrough of implemented user stories of week 2 of MovieViewer:
+
+<img src='http://imgur.com/jg4KrXa.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
