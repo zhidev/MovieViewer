@@ -76,7 +76,7 @@ Biggest difficulty: Getting the collectionView to perform a segue while theres a
 =====================================================================================
 Week 2
 Time Spent:
-Required + Optional: 2 Hours
+Required + Optional: 2 Hours 30 minutes
 Additional:
 
 
@@ -99,3 +99,5 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 - [x] Moved Now Playing and Top Rated switching to a segmented control
+- [x] Matched background view of detailed movies to keep the same view depending on which 
+view we entered from
