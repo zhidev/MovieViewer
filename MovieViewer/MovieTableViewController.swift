@@ -80,6 +80,15 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("did select row at indexpath")
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.blueColor()
+        cell!.selectedBackgroundView = backgroundView
+    }
+    
     func createURL() -> NSURL{
         let urlPath = NSURL( string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
         return urlPath!

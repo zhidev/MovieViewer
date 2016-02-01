@@ -99,7 +99,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieTCell" rowHeight="256" id="bF5-hy-RS9" customClass="MovieTCell" customModule="MovieViewer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="136" width="320" height="256"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="256"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="bF5-hy-RS9" id="uch-N1-Ca0">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="255"/>
