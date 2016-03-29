@@ -41,7 +41,6 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         tableView.dataSource = self
         tableView.delegate = self
         
-        print("TableView Test")
         
         searchBar.delegate = self
         
@@ -51,6 +50,10 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
+        let tableBGView = UIImage(named: "gradiant-background")
+        self.tableView.backgroundView = UIImageView.init(image: tableBGView, highlightedImage: tableBGView)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataRetrieved:", name: "DataCallRetrievedTableView", object: nil)
         
 
     }
@@ -72,65 +75,8 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieTCell", forIndexPath: indexPath) as! MovieTCell
         
         let movie = filteredtmovies![indexPath.row]
-        let title = movie["title"] as! String
-        let overview = movie["overview"] as! String
-        cell.titleLabel.text = title
-        cell.overviewLabel.text = overview
-        
-        //Low res + high res images
-        let low_resolution = "https://image.tmdb.org/t/p/w45"
-        let high_resolution = "https://image.tmdb.org/t/p/original"
-        
-        if let posterPath = movie["poster_path"] as? String {
-            let lowRes = NSURL(string: low_resolution + posterPath)
-            let highRes = NSURL(string: high_resolution + posterPath)
-            
-            //let imageURL = NSURL(string: baseUrl + posterPath)
-            //let imageRequest = NSURLRequest(URL: imageURL!)
-            let lowImageRequest = NSURLRequest(URL: lowRes!)
-            let highImageRequest = NSURLRequest(URL: highRes!)
-            cell.posterView.setImageWithURLRequest(
-                lowImageRequest,
-                placeholderImage: nil,
-                success: { (lowImageRequest, lowImageResponse, lowImage) -> Void in
-                    
-                    // smallImageResponse will be nil if the smallImage is already available
-                    // in cache (might want to do something smarter in that case).
-                    cell.posterView.alpha = 0.0
-                    cell.posterView.image = lowImage;
-                    
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        
-                        cell.posterView.alpha = 1.0
-                        
-                        }, completion: { (sucess) -> Void in
-                            
-                            // The AFNetworking ImageView Category only allows one request to be sent at a time
-                            // per ImageView. This code must be in the completion block.
-                            cell.posterView.setImageWithURLRequest(
-                                highImageRequest,
-                                placeholderImage: lowImage,
-                                success: { (highImageRequest, highImageResponse, highImage) -> Void in
-                                    
-                                    cell.posterView.image = highImage;
-                                    
-                                },
-                                failure: { (request, response, error) -> Void in
-                                    // do something for the failure condition of the large image request
-                                    // possibly setting the ImageView's image to a default image
-                            })
-                    })
-                },
-                failure: { (request, response, error) -> Void in
-                    // do something for the failure condition
-                    // possibly try to get the large image
-            })
-        }
-        else {
-            // No poster image. Can either set to nil (no image) or a default movie poster image
-            // that you include as an asset
-            cell.posterView.image = nil
-        }
+        cell.filteredMovieData = movie
+        /* Giant block of code moved into MovieTCell didSet of filteredMovieData */
         
         
         return cell
@@ -153,34 +99,13 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
     
     func createTable(){
         let request = createURL()
-        dataCall(request)
+        //dataCall(request)
+        DataManager.dataCall(request, collectionOrTable: 1)
     }
-    func dataCall(url: NSURL){
-        let request = NSURLRequest(
-            URL: url,
-            cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData,
-            timeoutInterval: 10)
-        
-        let session = NSURLSession(
-            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-            delegate: nil,
-            delegateQueue: NSOperationQueue.mainQueue()
-        )
-        
-        let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
-            completionHandler: { (dataOrNil, response, error) in
-                if let data = dataOrNil {
-                    if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
-                        data, options:[]) as? NSDictionary {
-                            self.tmovies = responseDictionary["results"] as? [NSDictionary]
-                            self.filteredtmovies = responseDictionary["results"] as? [NSDictionary]
-                            self.tableView.reloadData()
-                            MBProgressHUD.hideHUDForView(self.view, animated: true)
-                    }
-                }
-        })
-        task.resume()
-    }
+    
+    /*func dataCall(url: NSURL){
+        Code refactoed into DataManager
+    }*/
     
     
     func refreshControlAction(refreshControl: UIRefreshControl) {
@@ -224,22 +149,6 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    //Make tableview background pretty with gradient
-    /*func setBackgroundGradient(){
-        let rect = self.tableView.bounds
-        let layer = Color.makeLayer(rect)
-        self.bgView.layer.addSublayer(layer)
-        self.tableView.layer.addSublayer(layer)
-        self.tableView.backgroundView?.addSubview(bgView)
-    }*/
-    
-    /*func checkNet(){
-        if Reachability.isConnectedToNetwork() == true {
-            networkBar.hidden = true
-        } else {
-            networkBar.hidden = false
-        }
-    }*/
     
     //  Search Bar stuff
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -287,8 +196,17 @@ class MovieTableViewController: UIViewController, UITableViewDataSource, UITable
         })
         searchBar.becomeFirstResponder()
     }
+    
     @IBAction func valueChange(sender: AnyObject) {
         createTable()
+    }
+    
+    func dataRetrieved(notification: NSNotification){
+        let userInfo = notification.userInfo!["movieData"] as! [NSDictionary]
+        self.tmovies = userInfo
+        self.filteredtmovies = userInfo
+        self.tableView.reloadData()
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
     }
 
 }

@@ -63,8 +63,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.insertSubview(refreshControl, atIndex: 0)
-	
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataRetrieved:", name: "DataCallRetrievedCollectionView", object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,65 +82,11 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCCell
-        
         checkNet()
-        //Low res + high res images
-        let low_resolution = "https://image.tmdb.org/t/p/w45"
-        let high_resolution = "https://image.tmdb.org/t/p/original"
-        
-        let movie = filteredMovies![indexPath.row]
-        if let posterPath = movie["poster_path"] as? String {
-            let lowRes = NSURL(string: low_resolution + posterPath)
-            let highRes = NSURL(string: high_resolution + posterPath)
-            
-            //let imageURL = NSURL(string: baseUrl + posterPath)
-            //let imageRequest = NSURLRequest(URL: imageURL!)
-            let lowImageRequest = NSURLRequest(URL: lowRes!)
-            let highImageRequest = NSURLRequest(URL: highRes!)
-            cell.posterView.setImageWithURLRequest(
-                lowImageRequest,
-                placeholderImage: nil,
-                success: { (lowImageRequest, lowImageResponse, lowImage) -> Void in
-                    
-                    // smallImageResponse will be nil if the smallImage is already available
-                    // in cache (might want to do something smarter in that case).
-                    cell.posterView.alpha = 0.0
-                    cell.posterView.image = lowImage;
-                    
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        
-                        cell.posterView.alpha = 1.0
-                        
-                        }, completion: { (sucess) -> Void in
-                            
-                            // The AFNetworking ImageView Category only allows one request to be sent at a time
-                            // per ImageView. This code must be in the completion block.
-                            cell.posterView.setImageWithURLRequest(
-                                highImageRequest,
-                                placeholderImage: lowImage,
-                                success: { (highImageRequest, highImageResponse, highImage) -> Void in
-                                    
-                                    cell.posterView.image = highImage;
-                                    
-                                },
-                                failure: { (request, response, error) -> Void in
-                                    // do something for the failure condition of the large image request
-                                    // possibly setting the ImageView's image to a default image
-                            })
-                    })
-                },
-                failure: { (request, response, error) -> Void in
-                    // do something for the failure condition
-                    // possibly try to get the large image
-            })
+        if let movieObject = filteredMovies?[indexPath.row]{
+            cell.filteredMovieData = movieObject
         }
-        else {
-            // No poster image. Can either set to nil (no image) or a default movie poster image
-            // that you include as an asset
-            cell.posterView.image = nil
-        }
-
-        
+        /* Refactored into MovieCCell model */
         return cell
         
     }
@@ -177,33 +122,9 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     
     
     // MARK 2
-    func dataCall( url: NSURL ){
-        let request = NSURLRequest(URL: url)
-        let session = NSURLSession(
-            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-            delegate:nil,
-            delegateQueue:NSOperationQueue.mainQueue()
-        )
-        
-        let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
-            completionHandler: { (dataOrNil, response, error) in
-                if let data = dataOrNil {
-                    if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
-                        data, options:[]) as? NSDictionary {
-                            
-                            
-                            self.movies = responseDictionary["results"] as? [NSDictionary]
-                            self.filteredMovies = responseDictionary["results"] as? [NSDictionary]
-                            self.collectionView.reloadData()
-                            MBProgressHUD.hideHUDForView(self.view, animated: true)
-                    }
-                }
-        });
-        task.resume()
-    
-        checkNet()
-        
-    }
+    /*func dataCall( url: NSURL ){
+        Refactored into DataManager
+    }*/
     
     // MARK 1
     func createURL() -> NSURL{
@@ -215,7 +136,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     // Make the network connection to update our collection view. Flag if neccesary
     func createCollection(){
         let request = createURL()
-        dataCall(request)
+        DataManager.dataCall(request, collectionOrTable: 0)
     }
     
     //  Search Bar stuff
@@ -311,5 +232,13 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UISearc
     }
     @IBAction func valueChange(sender: AnyObject) {
         createCollection()
+    }
+    
+    func dataRetrieved(notification: NSNotification){
+        let userInfo = notification.userInfo!["movieData"] as! [NSDictionary]
+        self.movies = userInfo
+        self.filteredMovies = userInfo
+        self.collectionView.reloadData()
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
     }
 }

@@ -20,7 +20,7 @@ class selectedViewController: UIViewController {
     let baseUrl = "http://image.tmdb.org/t/p/w500"
 
     var theme: String?
-    var movie: NSDictionary!
+    var movie: NSDictionary?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,18 +29,21 @@ class selectedViewController: UIViewController {
 
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
         
-        let title = movie["title"] as? String
-        titleLabel.text = title
+
+        if let title = movie?["title"] as? String{
+            self.titleLabel.text = title
+        }
         
-        let overview = movie["overview"] as? String
-        overviewLabel.text = overview
+        if let overview = movie?["overview"] as? String{
+            overviewLabel.text = overview
+        }
         
         
-        if let posterPath = movie["poster_path"] as? String{
+        if let posterPath = movie?["poster_path"] as? String{
             let imageUrl = NSURL(string: baseUrl + posterPath)
             posterView.setImageWithURL(imageUrl!)
         }
-        
+
     }
 
     override func didReceiveMemoryWarning() {
