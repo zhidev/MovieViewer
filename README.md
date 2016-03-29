@@ -32,10 +32,10 @@ The following **additional** features are implemented:
 - [x] Fades searchbar in while doing a pull to refresh
 
 The following storyboards are in mind:
-- [ ] Keep a static gradient background for tableview cells while scrolling
+- [x] Keep a static gradient background for tableview cells while scrolling
 - [ ] Favorites Tab
 - [x] Remember what movie was selected and place so user doesn't have to scroll down again
-- [ ] More cosmetics for MovieSelectedViewController (ie fading images in, sliding in text, etc.)
+- [x] More cosmetics for MovieSelectedViewController (ie fading images in, sliding in text, etc.)
 - [x] Mirror collectionVew to tableView
 
 
@@ -113,5 +113,21 @@ Here's a walkthrough of implemented user stories of week 2 of MovieViewer:
 ![walkthrough](MovieViewer2.gif)`
 
 
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+
+## Changes Since Submission for class P1.0
+[x] Refactored code to more properly represent a MVC. 
+ - Moved DataCall() to a seperate class so it could be used in multiple view controllers
+ - Moved lots of code from the view controller to respective cells
+[x] Change force unwrapping of optionals to if let's 
+[x] The following from initial readme commit of this app:
+- [x] Keep a static gradient background for tableview cells while scrolling
+- [x] More cosmetics for MovieSelectedViewController (ie fading images in, sliding in text, etc.)
+
+Gif of P1.0 Changes:
+
+<img src='http://i.imgur.com/nfjWJCU.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
