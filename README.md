@@ -125,9 +125,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 [x] The following from initial readme commit of this app:
 - [x] Keep a static gradient background for tableview cells while scrolling
 - [x] More cosmetics for MovieSelectedViewController (ie fading images in, sliding in text, etc.)
-
+[x] Feedback: Deselecting tableView row 
 Gif of P1.0 Changes:
 
-<img src='http://i.imgur.com/nfjWJCU.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/Bfye1WW.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
