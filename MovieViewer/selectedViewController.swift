@@ -31,7 +31,7 @@ class selectedViewController: UIViewController {
         
 
         if let title = movie?["title"] as? String{
-            self.titleLabel.text = title
+            titleLabel.text = title
         }
         
         if let overview = movie?["overview"] as? String{
@@ -42,6 +42,16 @@ class selectedViewController: UIViewController {
         if let posterPath = movie?["poster_path"] as? String{
             let imageUrl = NSURL(string: baseUrl + posterPath)
             posterView.setImageWithURL(imageUrl!)
+            posterView.alpha = 0
+            UIView.animateWithDuration(2, animations: { () -> Void in
+                self.posterView.alpha = 1
+                
+            })
+        }
+        let initial = infoView.frame
+        infoView.frame.origin.y = 0
+        UIView.animateWithDuration(1) { () -> Void in
+            self.infoView.frame.origin.y = initial.origin.y
         }
 
     }
