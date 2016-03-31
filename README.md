@@ -118,14 +118,15 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 
 ## Changes Since Submission for class P1.0
-[x] Refactored code to more properly represent a MVC. 
+
+- [x] Refactored code to more properly represent a MVC. 
  - Moved DataCall() to a seperate class so it could be used in multiple view controllers
  - Moved lots of code from the view controller to respective cells
-[x] Change force unwrapping of optionals to if let's 
-[x] The following from initial readme commit of this app:
+- [x] Change force unwrapping of optionals to if let's 
+- [x] The following from initial readme commit of this app:
 - [x] Keep a static gradient background for tableview cells while scrolling
 - [x] More cosmetics for MovieSelectedViewController (ie fading images in, sliding in text, etc.)
-[x] Feedback: Deselecting tableView row 
+- [x] Feedback: Deselecting tableView row 
 Gif of P1.0 Changes:
 
 <img src='http://i.imgur.com/Bfye1WW.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
